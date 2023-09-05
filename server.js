@@ -41,7 +41,13 @@ app.use('/api/users/',userRoute)
 //     res.sendFile(path.resolve(__dirname,'restbilling/build/index.html'))
 //   })
 // }
-
+if(process.env.NODE_ENV==='production')
+{
+    app.use('/' , express.static('restbilling/build'))
+    app.get('*' , (req,res)=>{
+         res.sendFile(path.resolve(__dirname , 'restbilling/build/index.html'))
+    }) 
+}
 //port
 const PORT = process.env.PORT || 8080;
 
